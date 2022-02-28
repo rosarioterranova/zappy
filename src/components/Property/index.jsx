@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import style from "./Property.module.css"
+import {ROOM_TYPES} from "../../helpers/constants"
 
 import { Divider } from '../Divider';
 
@@ -32,7 +33,7 @@ export const Property = ({id, image, type, title, tenants, baths, beds, descript
 Property.propTypes = {
     id: PropTypes.number,
     image: PropTypes.string,
-    type: PropTypes.oneOf(["Private Room", "Entire Property", "Shared Room", "Studio"]),
+    type: PropTypes.oneOf([...ROOM_TYPES]),
     title: PropTypes.string,
     tenants: PropTypes.number,
     baths: PropTypes.number,
