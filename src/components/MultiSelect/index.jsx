@@ -1,10 +1,10 @@
 import { useState } from "react"
-
+import PropTypes from 'prop-types';
 import style from "./MultiSelect.module.css"
 
-import Checkbox from "../Checkbox"
+import {Checkbox} from "../Checkbox"
 
-export default function MultiSelect({label, options, onOptionSelected}) {
+export const MultiSelect = ({label, options, onOptionSelected}) => {
     const [showOptions, setShowOptions] = useState(false)
 
   return (
@@ -36,3 +36,16 @@ function Option({text, onClickCallback}){
         </div>
     )
 }
+
+MultiSelect.propTypes = {
+    label: PropTypes.string,
+    options: PropTypes.array,
+    onOptionSelected: PropTypes.func,
+  }
+  
+  MultiSelect.defaultProps = {
+    label: "Title",
+    options: [{label: "Option 1", value: false}, {label: "Option 2", value: true}],
+    onOptionSelected: ()=>{},
+  };
+  

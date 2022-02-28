@@ -1,7 +1,8 @@
 import { useState } from "react"
+import PropTypes from 'prop-types';
 import style from "./Checkbox.module.css"
 
-export default function Checkbox({defaultChecked = false, onClick}) {
+export const Checkbox = ({defaultChecked, label, labelPosition, onClick}) => {
     const [checked, setChecked] = useState(defaultChecked)
 
     function onClickHandler(){
@@ -10,8 +11,26 @@ export default function Checkbox({defaultChecked = false, onClick}) {
     }
 
   return (
-    <div className={style.checkbox} onClick={onClickHandler} >
+    <div className={style.container}>
+      {labelPosition === "left" && <p>{label}</p>}
+      <div className={style.checkbox} onClick={onClickHandler} >
         {checked && <div className={style.marker}></div>}
+       </div>
+      {labelPosition === "right" && <p>{label}</p>}
     </div>
   )
 }
+
+Checkbox.propTypes = {
+  defaultChecked: PropTypes.bool,
+  label: PropTypes.string,
+  labelPosition: PropTypes.oneOf(["none","left","right"]),
+  onClick: PropTypes.func,
+}
+
+Checkbox.defaultProps = {
+  defaultChecked: false,
+  label: "Hello",
+  labelPosition: "right",
+  onClick: () => {},
+};
