@@ -2,7 +2,7 @@ import {useState} from 'react'
 import style from "./Navbar.module.css"
 import logo from "../../assets/zappyrent.png"
 
-import MultiSelect from '../MultiSelect'
+import {MultiSelect} from '../MultiSelect'
 
 export default function Navbar() {
   
@@ -17,7 +17,6 @@ export default function Navbar() {
     const filtersCopy = [...filters]
     const filterToReplace = filters.findIndex(el => el.label === newFilter.label)
     filtersCopy.splice(filterToReplace,1,newFilter)
-    console.log(filtersCopy)
     setFilters(filtersCopy)
   }
 
