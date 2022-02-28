@@ -18,9 +18,10 @@ export const Property = ({
   description,
   price,
   available,
+  onClickCallback,
 }) => {
   return (
-    <div className={style.container}>
+    <div className={style.container} onClick={() => onClickCallback(id)}>
       <div className={style.imgContainer}>
         {available && <p className={style.badge}>Disponibile subito</p>}
         <img className={style.imgCover} src={image} alt="room" />

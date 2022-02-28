@@ -1,7 +1,16 @@
+import { useState } from "react";
 import { Property } from "../Property";
 import style from "./PropertiesList.module.css";
 
+import { PropertyDetail } from "../PropertyDetail";
+
 export const PropertiesList = ({ properties }) => {
+  const [showDialog, setShowDialog] = useState(false);
+
+  function onClickHandler(id) {
+    console.log("clicked id:" + id);
+  }
+
   return (
     <div>
       <p className={style.counter}>{properties.length} alloggi trovati</p>
@@ -20,9 +29,11 @@ export const PropertiesList = ({ properties }) => {
               price={property.price}
               available={property.available}
               key={index}
+              onClickCallback={onClickHandler}
             />
           ))}
       </div>
+      <PropertyDetail />
     </div>
   );
 };
