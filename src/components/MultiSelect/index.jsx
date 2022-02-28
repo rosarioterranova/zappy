@@ -6,8 +6,17 @@ import downArrow from "../../assets/down-arrow.svg"
 import UpArrow from "../../assets/up-arrow.svg"
 import {Checkbox} from "../Checkbox"
 
-export const MultiSelect = ({label, options, onOptionSelected}) => {
+export const MultiSelect = ({label, options, onChange}) => {
+  const [optionsData, setOptionsData] = useState(options)
   const [showOptions, setShowOptions] = useState(false)
+
+  function onOptionChecked(optionChecked){
+    const optionsDataCopy = [...optionsData]
+    const optionToChange = optionsData.findIndex(el => el.label === optionChecked.label)
+    optionsDataCopy.splice(optionToChange,1,optionChecked)
+    onChange(optionsDataCopy)
+    setOptionsData(optionsDataCopy)
+  }
 
   return (
     <div>
@@ -17,23 +26,17 @@ export const MultiSelect = ({label, options, onOptionSelected}) => {
         </div>
         {showOptions && (
             <div className={style.optionList}>
-                {options.length>0? options.map((option,index) => <Option key={index} text={option.label} onClickCallback={onOptionSelected} />) : "No options"}
+                {optionsData.length>0? optionsData.map((option,index) => <Option key={index} data={option} onClickCallback={(optionChecked)=>onOptionChecked(optionChecked)} />) : "No options"}
             </div>
         )}
     </div>
   )
 }
 
-function Option({text, onClickCallback}){
-    function onClickHandler(checked){
-        onClickCallback({
-            label: text,
-            value: checked
-        })
-    }
+const Option = ({data, onClickCallback}) =>{
     return (
         <div className={style.option}>
-            <Checkbox label={text} onClick={onClickHandler} />
+            <Checkbox label={data.label} defaultChecked={data.value} onClick={(checked =>  onClickCallback({ label: data.label, value: checked, }))} />
         </div>
     )
 }
@@ -41,12 +44,12 @@ function Option({text, onClickCallback}){
 MultiSelect.propTypes = {
     label: PropTypes.string,
     options: PropTypes.array,
-    onOptionSelected: PropTypes.func,
+    onChange: PropTypes.func,
   }
   
   MultiSelect.defaultProps = {
     label: "Title",
     options: [{label: "Option 1", value: false}, {label: "Option 2", value: true}],
-    onOptionSelected: ()=>{},
+    onChange: ()=>{},
   };
   

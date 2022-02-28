@@ -11,5 +11,5 @@ const Template = (args) => <MultiSelect {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  onOptionSelected: (e) => console.log(e)
+  onChange: (e) => console.log(e)
 }
