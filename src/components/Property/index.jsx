@@ -9,11 +9,14 @@ export const Property = ({image}) => {
             <img className={style.imgCover} src={image} alt="room photo" />
         </div>
         <div className={style.content}>
-            <p>type</p>
-            <p>title</p>
-            <p>dscription</p>
-            {/* <p>numbers</p> */}
-            {/* <divider></divider> */}
+            <p className={style.type}>type</p>
+            <p className={style.title}>title</p>
+            <div className={style.numericDetails}>
+                <p className={style.type}><span className={style.number}>2</span> inquilini</p>
+                <p className={style.type}><span className={style.number}>2</span> bagno</p>
+                <p className={style.type}><span className={style.number}>2</span> letto</p>
+            </div>
+            <p className={style.type}>dscription</p>
             <div>
                 <p>Canone</p>
                 <p>price/mese</p>
@@ -22,7 +25,6 @@ export const Property = ({image}) => {
     </div>
   )
 }
-
 
 Property.propTypes = {
     image: PropTypes.string,
