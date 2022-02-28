@@ -1,7 +1,7 @@
-import { Property } from './index';
+import { Property } from "./index";
 
 export default {
-  title: 'Zappy/Property',
+  title: "Zappy/Property",
   component: Property,
 };
 

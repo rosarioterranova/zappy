@@ -1,15 +1,15 @@
-import { MultiSelect } from './index';
-import { Checkbox } from '../Checkbox';
+import { MultiSelect } from "./index";
+import { Checkbox } from "../Checkbox";
 
 export default {
-  title: 'DataEntry/MultiSelect',
+  title: "DataEntry/MultiSelect",
   component: MultiSelect,
-  subcomponents: {Checkbox}
+  subcomponents: { Checkbox },
 };
 
 const Template = (args) => <MultiSelect {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  onChange: (e) => console.log(e)
-}
+  onChange: (e) => console.log(e),
+};

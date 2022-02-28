@@ -1,7 +1,7 @@
-import { PropertyDetail } from './index';
+import { PropertyDetail } from "./index";
 
 export default {
-  title: 'Zappy/PropertyDetail',
+  title: "Zappy/PropertyDetail",
   component: PropertyDetail,
 };
 

@@ -1,7 +1,7 @@
-import { NumericDetails } from './index';
+import { NumericDetails } from "./index";
 
 export default {
-  title: 'General/NumericDetails',
+  title: "General/NumericDetails",
   component: NumericDetails,
 };
 

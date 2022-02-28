@@ -1,8 +1,7 @@
-
-import { Dialog } from './index';
+import { Dialog } from "./index";
 
 export default {
-  title: 'General/Dialog',
+  title: "General/Dialog",
   component: Dialog,
 };
 
@@ -16,5 +15,5 @@ Default.args = {
       <p>Test</p>
       <p>Test</p>
     </div>
-  )
-}
+  ),
+};

@@ -1,7 +1,7 @@
-import { Checkbox } from './index';
+import { Checkbox } from "./index";
 
 export default {
-  title: 'DataEntry/Checkbox',
+  title: "DataEntry/Checkbox",
   component: Checkbox,
 };
 
