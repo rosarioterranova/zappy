@@ -12,13 +12,13 @@ import { Divider } from "./components/Divider";
 
 import { PropertiesList } from "./components/PropertiesList";
 
-function App() {
+export default function App() {
   const [propertiesData, setPropertiesData] = useState([]);
-  const [filteredProperties, setFilteredProperties] = useState([]);
-  const [filters, setFilters] = useState(
+  const [propertiesFiltered, setPropertiesFiltered] = useState([]);
+  const [typeFilters, setTypeFilters] = useState(
     ROOM_TYPES.map((type) => ({ label: type, value: false }))
   );
-  const [available, setAvailable] = useState(false);
+  const [availableFilter, setAvailableFilter] = useState(false);
 
   useEffect(() => {
     fetch(
@@ -27,13 +27,13 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         setPropertiesData(data);
-        setFilteredProperties(data);
+        setPropertiesFiltered(data);
       });
   }, []);
 
   useEffect(() => {
-    applyFilter();
-  }, [filters, available]);
+    applyFilters();
+  }, [typeFilters, availableFilter]);
 
   if (propertiesData.length === 0) {
     return (
@@ -44,18 +44,20 @@ function App() {
     );
   }
 
-  function applyFilter() {
-    setFilteredProperties(
-      propertiesData.filter((property) => {
-        const typesToFilter = filters
-          .filter((filter) => filter.value === true)
-          .map((filter) => filter.label);
-        return (
-          property.available === available ||
-          typesToFilter.includes(property.type)
-        );
-      })
+  function applyFilters() {
+    const filteredByAvailability = propertiesData.filter(
+      (property) => property.available === availableFilter
     );
+
+    const typesToFilter = typeFilters
+      .filter((filter) => filter.value === true)
+      .map((filter) => filter.label);
+
+    const filteredByTypeAndAvailability = filteredByAvailability.filter(
+      (property) => typesToFilter.includes(property.type)
+    );
+
+    setPropertiesFiltered(filteredByTypeAndAvailability);
   }
 
   return (
@@ -67,20 +69,19 @@ function App() {
         <div className={style.filters}>
           <MultiSelect
             label="Tipologia"
-            options={filters}
-            onChange={(newFilters) => setFilters(newFilters)}
+            options={typeFilters}
+            onChange={(newFilters) => setTypeFilters(newFilters)}
           />
           <Checkbox
             label="Disponibile subito"
-            defaultChecked={available}
-            onClick={(checked) => setAvailable(!available)}
+            defaultChecked={availableFilter}
+            labelPosition="left"
+            onClick={(checked) => setAvailableFilter(!availableFilter)}
           />
         </div>
         <Divider />
       </div>
-      <PropertiesList properties={filteredProperties} />
+      <PropertiesList properties={propertiesFiltered} />
     </div>
   );
 }
-
-export default App;

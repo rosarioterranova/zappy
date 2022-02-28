@@ -7,7 +7,7 @@ export const PropertiesList = ({ properties }) => {
       <p className={style.counter}>{properties.length} alloggi trovati</p>
       <div className={style.list}>
         {properties &&
-          properties.map((property) => (
+          properties.map((property, index) => (
             <Property
               id={property.id}
               image={property.images[0].url}
@@ -19,6 +19,7 @@ export const PropertiesList = ({ properties }) => {
               description={property.description}
               price={property.price}
               available={property.available}
+              key={index}
             />
           ))}
       </div>
