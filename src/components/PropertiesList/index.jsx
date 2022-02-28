@@ -10,7 +10,6 @@ export const PropertiesList = ({ properties }) => {
   const [dialogData, setDialogData] = useState(null);
 
   function onClickHandler(id) {
-    console.log("clicked id:" + id);
     setDialogData(properties.find((property) => property.id === id));
     setShowDialog(true);
   }

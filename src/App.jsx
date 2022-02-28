@@ -38,6 +38,7 @@ export default function App() {
   if (propertiesData.length === 0) {
     return (
       <div className={style.loading}>
+        <img className={style.logo} src={logo} alt="logo" />
         <p>Loading</p>
         <Spinner />
       </div>
