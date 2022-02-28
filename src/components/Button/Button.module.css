@@ -1,0 +1,14 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  width: 50%;
+  border: none;
+  padding: 1rem;
+  color: white;
+  border-radius: 2rem;
+  background-color: grey;
+}

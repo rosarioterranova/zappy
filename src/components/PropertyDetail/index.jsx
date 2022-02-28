@@ -1,8 +1,9 @@
 import style from "./PropertyDetail.module.css"
 import PropTypes from 'prop-types';
 
-import { Dialog } from "../Dialog/index"
-import { NumericDetails } from "../NumericDetails/index"
+import { Dialog } from "../Dialog"
+import { NumericDetails } from "../NumericDetails"
+import { Button } from "../Button"
 
 export const PropertyDetail = ({
     id,
@@ -28,7 +29,7 @@ export const PropertyDetail = ({
               <p className={style.bold}>{street} {streetNumber}, {cap} {city} ({province})</p>
               <p className={style.description}>{description}</p>
               <p className={style.price}>Canone d'affitto <span className={style.bold}>€ {price}</span> /mese</p>
-              <button>ssd</button>
+              <Button label="Prenota alloggio" />
           </div>
       </Dialog>
   )
