@@ -1,7 +1,7 @@
 import { Divider } from './index';
 
 export default {
-  title: 'Generaly/Divider',
+  title: 'General/Divider',
   component: Divider,
 };
 
