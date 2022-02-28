@@ -1,5 +1,10 @@
 import {useState, useEffect} from "react"
 
+import style from "./App.module.css"
+
+import Spinner from "./components/Spinner"
+import Navbar from "./components/Navbar"
+
 function App() {
 
   const [propertiesData, setPropertiesData] = useState([])
@@ -11,8 +16,10 @@ function App() {
   }, [])
   
   return (
-    <div className="App">
+    <div className={style.app}>
+      <Navbar />
       <p>Hello World</p>
+      {propertiesData.length > 0 ? "Loaded" : <Spinner />}
     </div>
   );
 }
