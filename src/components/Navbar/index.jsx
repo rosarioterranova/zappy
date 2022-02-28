@@ -7,9 +7,9 @@ import {MultiSelect} from '../MultiSelect'
 export default function Navbar() {
   
   const [filters, setFilters] = useState([
-    {label: "Private room", value: false},
-    {label: "Entire property", value: false},
-    {label: "Shared room", value: false},
+    {label: "Private Room", value: false},
+    {label: "Entire Property", value: false},
+    {label: "Shared Room", value: false},
     {label: "Studio", value: false},
   ])
 

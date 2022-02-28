@@ -2,13 +2,27 @@
   width: 24rem;
   border-radius: 2rem;
   overflow: hidden;
-  border: 1px solid grey;
+  border: 1px solid rgba(128, 128, 128, 0.5);
 }
 
 .imgCover {
   height: 10rem;
   width: 100%;
   object-fit: cover;
+}
+
+.imgContainer {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: lightgrey;
+  padding: 0.7rem;
+  border-radius: 0.8rem;
+  font-size: 0.9rem;
 }
 
 .content {
@@ -31,11 +45,22 @@
   display: flex;
   flex-direction: row;
   gap: 2rem;
-  margin: 0.8rem;
+  margin: 0.5rem 0rem;
 }
 
 .number {
   font-weight: 800;
   font-size: 1.2rem;
   color: black;
+}
+
+.priceContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 1rem;
+}
+
+.canone {
+  color: grey;
+  font-weight: 800;
 }
