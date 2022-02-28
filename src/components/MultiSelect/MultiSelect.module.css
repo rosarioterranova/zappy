@@ -1,0 +1,34 @@
+.dropdownContainer {
+  width: 10rem;
+  border: 1px solid grey;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.dropdownLabel {
+  user-select: none;
+}
+
+.optionList {
+  width: fit-content;
+  border: 1px solid grey;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin-top: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.optionLabel {
+  user-select: none;
+}
