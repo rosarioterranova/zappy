@@ -1,5 +1,8 @@
 import PropTypes from 'prop-types';
 import style from "./Property.module.css"
+
+import {NumericDetails} from "../NumericDetails"
+
 import {ROOM_TYPES} from "../../helpers/constants"
 
 import { Divider } from '../Divider';
@@ -14,11 +17,7 @@ export const Property = ({id, image, type, title, tenants, baths, beds, descript
         <div className={style.content}>
             <p className={style.type}>{type}</p>
             <p className={style.title}>{title}</p>
-            <div className={style.numericDetails}>
-                <p className={style.type}><span className={style.number}>{tenants}</span> inquilini</p>
-                <p className={style.type}><span className={style.number}>{baths}</span> bagni</p>
-                <p className={style.type}><span className={style.number}>{beds}</span> letti</p>
-            </div>
+            <NumericDetails tenants={tenants} baths={baths} beds={beds} />
             <p className={style.type}>{description}</p>
             <Divider />
             <div className={style.priceContainer}>

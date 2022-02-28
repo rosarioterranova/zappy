@@ -1,0 +1,28 @@
+.propertyDetail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.imgCover {
+  height: 10rem;
+  width: 100%;
+  object-fit: cover;
+}
+
+.bold {
+  font-weight: 800;
+  color: black;
+}
+
+.description {
+  color: grey;
+  font-size: 0.9rem;
+}
+
+.price {
+  font-weight: 800;
+  color: grey;
+}
