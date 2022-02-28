@@ -1,3 +1,15 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .logo {
   height: 1.5rem;
+}
+
+.filters {
+  display: flex;
+  gap: 2rem;
+  margin-left: 2rem;
 }

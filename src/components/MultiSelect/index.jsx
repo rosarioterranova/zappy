@@ -19,7 +19,7 @@ export const MultiSelect = ({label, options, onChange}) => {
   }
 
   return (
-    <div>
+    <div className={style.multiSelect}>
         <div className={style.dropdownContainer} onClick={()=>setShowOptions(!showOptions)}>
             <p className={style.dropdownLabel}>{label}</p>
             <img className={style.dropdownArrow} src={showOptions? UpArrow : downArrow} alt="navigation-arrow" />

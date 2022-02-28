@@ -3,6 +3,8 @@ import style from "./Navbar.module.css"
 import logo from "../../assets/zappyrent.png"
 
 import {MultiSelect} from '../MultiSelect'
+import { Checkbox } from '../Checkbox'
+import {Divider} from "../Divider"
 import {ROOM_TYPES} from "../../helpers/constants"
 
 export default function Navbar() {
@@ -11,11 +13,15 @@ export default function Navbar() {
 
 
   return (
-    <div>
+    <div className={style.navbar}>
         <div>
             <img className={style.logo} src={logo} alt="logo" />
         </div>
-        <MultiSelect label="Tipologia" options={filters} onChange={newFilters => setFilters(newFilters)} />
+        <div className={style.filters}>
+          <MultiSelect label="Tipologia" options={filters} onChange={newFilters => setFilters(newFilters)} />
+          <Checkbox label='Disponibile subito' />
+        </div>
+        <Divider />
     </div>
   )
 }
