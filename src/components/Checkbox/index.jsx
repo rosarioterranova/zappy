@@ -12,11 +12,11 @@ export const Checkbox = ({defaultChecked, label, labelPosition, onClick}) => {
 
   return (
     <div className={style.container}>
-      {labelPosition === "left" && <p>{label}</p>}
+      {labelPosition === "left" && <p className={style.label}>{label}</p>}
       <div className={style.checkbox} onClick={onClickHandler} >
         {checked && <div className={style.marker}></div>}
        </div>
-      {labelPosition === "right" && <p>{label}</p>}
+      {labelPosition === "right" && <p className={style.label}>{label}</p>}
     </div>
   )
 }

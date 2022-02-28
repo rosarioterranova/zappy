@@ -1,6 +1,5 @@
 .dropdownContainer {
   width: 10rem;
-  height: 2rem;
   border: 1px solid grey;
   border-radius: 1rem;
   padding: 0.5rem;
@@ -11,10 +10,20 @@
 
 .dropdownLabel {
   user-select: none;
+  color: grey;
+}
+
+.dropdownArrow {
+  user-select: none;
+  width: 1rem;
+  height: 1rem;
+  padding: 0.1rem;
 }
 
 .optionList {
   width: fit-content;
+  flex-grow: 1;
+  flex-shrink: 1;
   border: 1px solid grey;
   border-radius: 1rem;
   padding: 0.5rem;

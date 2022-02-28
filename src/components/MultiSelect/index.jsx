@@ -2,16 +2,18 @@ import { useState } from "react"
 import PropTypes from 'prop-types';
 import style from "./MultiSelect.module.css"
 
+import downArrow from "../../assets/down-arrow.svg"
+import UpArrow from "../../assets/up-arrow.svg"
 import {Checkbox} from "../Checkbox"
 
 export const MultiSelect = ({label, options, onOptionSelected}) => {
-    const [showOptions, setShowOptions] = useState(false)
+  const [showOptions, setShowOptions] = useState(false)
 
   return (
     <div>
         <div className={style.dropdownContainer} onClick={()=>setShowOptions(!showOptions)}>
             <p className={style.dropdownLabel}>{label}</p>
-            <p className={style.dropdownLabel}>{showOptions? "▲" : "▼"}</p>
+            <img className={style.dropdownArrow} src={showOptions? UpArrow : downArrow} alt="navigation-arrow" />
         </div>
         {showOptions && (
             <div className={style.optionList}>
@@ -31,8 +33,7 @@ function Option({text, onClickCallback}){
     }
     return (
         <div className={style.option}>
-            <Checkbox onClick={onClickHandler} />
-            <p className={style.optionLabel}>{text}</p>
+            <Checkbox label={text} onClick={onClickHandler} />
         </div>
     )
 }
