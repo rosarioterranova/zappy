@@ -17,11 +17,12 @@ export const Property = ({
   beds,
   description,
   price,
+  available,
 }) => {
   return (
     <div className={style.container}>
       <div className={style.imgContainer}>
-        <p className={style.badge}>Disponibile subito</p>
+        {available && <p className={style.badge}>Disponibile subito</p>}
         <img className={style.imgCover} src={image} alt="room" />
       </div>
       <div className={style.content}>
@@ -51,6 +52,7 @@ Property.propTypes = {
   beds: PropTypes.number,
   description: PropTypes.string,
   price: PropTypes.number,
+  available: PropTypes.bool,
 };
 
 Property.defaultProps = {
@@ -64,4 +66,5 @@ Property.defaultProps = {
   description:
     "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, odio",
   price: 300,
+  available: true,
 };

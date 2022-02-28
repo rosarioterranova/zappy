@@ -14,7 +14,7 @@ import { PropertiesList } from "./components/PropertiesList";
 
 function App() {
   const [propertiesData, setPropertiesData] = useState([]);
-  const [filteredProperties, setFilteredPropertied] = useState([]);
+  const [filteredProperties, setFilteredProperties] = useState([]);
   const [filters, setFilters] = useState(
     ROOM_TYPES.map((type) => ({ label: type, value: false }))
   );
@@ -27,7 +27,7 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         setPropertiesData(data);
-        setFilteredPropertied(data);
+        setFilteredProperties(data);
       });
   }, []);
 
@@ -45,7 +45,17 @@ function App() {
   }
 
   function applyFilter() {
-    //TODO
+    setFilteredProperties(
+      propertiesData.filter((property) => {
+        const typesToFilter = filters
+          .filter((filter) => filter.value === true)
+          .map((filter) => filter.label);
+        return (
+          property.available === available ||
+          typesToFilter.includes(property.type)
+        );
+      })
+    );
   }
 
   return (
