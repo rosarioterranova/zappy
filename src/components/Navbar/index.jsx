@@ -11,7 +11,6 @@ export default function Navbar() {
   
   const [filters, setFilters] = useState(ROOM_TYPES.map(type => ({label:type, value:false})))
 
-
   return (
     <div className={style.navbar}>
         <div>
