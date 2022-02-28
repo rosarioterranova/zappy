@@ -7,6 +7,7 @@ import UpArrow from "../../assets/up-arrow.svg";
 import { Checkbox } from "../Checkbox";
 
 export const MultiSelect = ({ label, options, onChange }) => {
+  const [actualLabel, setActualLabel] = useState(label);
   const [optionsData, setOptionsData] = useState(options);
   const [showOptions, setShowOptions] = useState(false);
 
@@ -18,6 +19,14 @@ export const MultiSelect = ({ label, options, onChange }) => {
     optionsDataCopy.splice(optionToChange, 1, optionChecked);
     onChange(optionsDataCopy);
     setOptionsData(optionsDataCopy);
+    const enabledFilters = optionsDataCopy.filter(
+      (option) => option.value === true
+    );
+    setActualLabel(
+      enabledFilters.length > 1
+        ? `${enabledFilters[0].label} +1`
+        : enabledFilters[0].label
+    );
   }
 
   return (
@@ -26,7 +35,7 @@ export const MultiSelect = ({ label, options, onChange }) => {
         className={style.dropdownContainer}
         onClick={() => setShowOptions(!showOptions)}
       >
-        <p className={style.dropdownLabel}>{label}</p>
+        <p className={style.dropdownLabel}>{actualLabel}</p>
         <img
           className={style.dropdownArrow}
           src={showOptions ? UpArrow : downArrow}
@@ -76,7 +85,7 @@ MultiSelect.defaultProps = {
   label: "Title",
   options: [
     { label: "Option 1", value: false },
-    { label: "Option 2", value: true },
+    { label: "Option 2", value: false },
   ],
   onChange: () => {},
 };
