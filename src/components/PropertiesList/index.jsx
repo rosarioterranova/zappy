@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Property } from "../Property";
 import style from "./PropertiesList.module.css";
+import { enablePageScroll } from "../../helpers";
 
 import { PropertyDetail } from "../PropertyDetail";
 
@@ -9,6 +10,12 @@ export const PropertiesList = ({ properties }) => {
 
   function onClickHandler(id) {
     console.log("clicked id:" + id);
+    setShowDialog(true);
+  }
+
+  function onCloseDialog() {
+    setShowDialog(false);
+    enablePageScroll();
   }
 
   return (
@@ -33,7 +40,7 @@ export const PropertiesList = ({ properties }) => {
             />
           ))}
       </div>
-      <PropertyDetail />
+      {showDialog && <PropertyDetail onClose={onCloseDialog} />}
     </div>
   );
 };

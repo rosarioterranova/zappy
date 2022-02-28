@@ -1,5 +1,6 @@
 import style from "./PropertyDetail.module.css";
 import PropTypes from "prop-types";
+import { disablePageScroll } from "../../helpers";
 
 import { Dialog } from "../Dialog";
 import { NumericDetails } from "../NumericDetails";
@@ -19,9 +20,12 @@ export const PropertyDetail = ({
   province,
   description,
   price,
+  onClose,
 }) => {
+  disablePageScroll();
+
   return (
-    <Dialog>
+    <Dialog onCloseCallback={onClose}>
       <div className={style.propertyDetail}>
         <p className={style.bold}>{title}</p>
         <img className={style.imgCover} src={image} alt="room" />

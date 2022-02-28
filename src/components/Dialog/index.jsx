@@ -9,7 +9,12 @@ export const Dialog = ({ onCloseCallback, children }) => {
     <div className={style.container}>
       <div className={style.dialog}>
         <div className={style.header}>
-          <img className={style.imgHeader} src={times} alt="close" />
+          <img
+            className={style.imgHeader}
+            src={times}
+            alt="close"
+            onClick={onCloseCallback}
+          />
         </div>
         {children}
       </div>
