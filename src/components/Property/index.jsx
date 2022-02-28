@@ -1,13 +1,14 @@
-import React from 'react'
+import PropTypes from 'prop-types';
+import style from "./Property.module.css"
 
-export const Property = () => {
+export const Property = ({image}) => {
   return (
-    <div>
+    <div className={style.container}>
         <div>
             {/* <label></label> */}
-            <img src="" alt="" srcset="" />
+            <img className={style.imgCover} src={image} alt="room photo" />
         </div>
-        <div>
+        <div className={style.content}>
             <p>type</p>
             <p>title</p>
             <p>dscription</p>
@@ -21,3 +22,13 @@ export const Property = () => {
     </div>
   )
 }
+
+
+Property.propTypes = {
+    image: PropTypes.string,
+  }
+  
+  Property.defaultProps = {
+    image: "https://placeimg.com/1280/960/arch?random=1",
+  };
+  
