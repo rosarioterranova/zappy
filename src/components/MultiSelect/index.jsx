@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import style from "./MultiSelect.module.css";
 
@@ -10,6 +10,11 @@ export const MultiSelect = ({ label, options, onChange }) => {
   const [actualLabel, setActualLabel] = useState(label);
   const [optionsData, setOptionsData] = useState(options);
   const [showOptions, setShowOptions] = useState(false);
+
+  useEffect(() => {
+    setOptionsData(options);
+    setActualLabel(label);
+  }, [options]);
 
   function onOptionChecked(optionChecked) {
     const optionsDataCopy = [...optionsData];

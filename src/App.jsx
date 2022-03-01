@@ -11,11 +11,13 @@ import {
   filterProperties,
   updateTypeFilters,
   updateAvailableFilter,
+  resetFilters,
 } from "./slices/propertiesSlice";
 
 //Stiles
 import style from "./App.module.css";
 import logo from "./assets/zappyrent.png";
+import reset from "./assets/reset.svg";
 
 //Helpers
 import { REQUEST_STATUS } from "./helpers/constants";
@@ -26,6 +28,7 @@ import { MultiSelect } from "./components/MultiSelect";
 import { Checkbox } from "./components/Checkbox";
 import { Divider } from "./components/Divider";
 import { PropertiesList } from "./components/PropertiesList";
+import { ButtonIcon } from "./components/ButtonIcon";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -71,6 +74,11 @@ export default function App() {
             onClick={(checked) =>
               dispatch(updateAvailableFilter(!availableFilter))
             }
+          />
+          <ButtonIcon
+            label="Reset Filters"
+            icon={reset}
+            onClick={() => dispatch(resetFilters())}
           />
         </div>
         <Divider />

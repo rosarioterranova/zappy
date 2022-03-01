@@ -58,6 +58,16 @@ const propertiesSlice = createSlice({
       state.availableFilterDefault = false;
       state.availableFilter = action.payload;
     },
+    resetFilters(state, action) {
+      state.propertiesFiltered = state.propertiesData;
+      state.typeFiltersDefault = true;
+      state.availableFilterDefault = true;
+      state.typeFilters = ROOM_TYPES.map((type) => ({
+        label: type,
+        value: false,
+      }));
+      state.availableFilter = false;
+    },
   },
   extraReducers(builder) {
     builder
@@ -75,8 +85,12 @@ const propertiesSlice = createSlice({
   },
 });
 
-export const { filterProperties, updateTypeFilters, updateAvailableFilter } =
-  propertiesSlice.actions;
+export const {
+  filterProperties,
+  updateTypeFilters,
+  updateAvailableFilter,
+  resetFilters,
+} = propertiesSlice.actions;
 
 export default propertiesSlice.reducer;
 
