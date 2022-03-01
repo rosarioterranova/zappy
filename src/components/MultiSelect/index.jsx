@@ -22,11 +22,11 @@ export const MultiSelect = ({ label, options, onChange }) => {
     const enabledFilters = optionsDataCopy.filter(
       (option) => option.value === true
     );
-    setActualLabel(
-      enabledFilters.length > 1
-        ? `${enabledFilters[0].label} +1`
-        : enabledFilters[0].label
-    );
+
+    if (enabledFilters.length === 0) setActualLabel(label);
+    if (enabledFilters.length === 1) setActualLabel(enabledFilters[0].label);
+    if (enabledFilters.length > 1)
+      setActualLabel(`${enabledFilters[0].label} +1`);
   }
 
   return (
