@@ -22,28 +22,40 @@ const propertiesSlice = createSlice({
     },
     propertiesData: [],
     propertiesFiltered: [],
+    typeFiltersDefault: true,
+    availableFilterDefault: true,
     typeFilters: ROOM_TYPES.map((type) => ({ label: type, value: false })),
     availableFilter: false,
   },
   reducers: {
     filterProperties(state, action) {
-      //Filter propertiesData on Types
-      const typesToFilter = state.typeFilters
-        .filter((filter) => filter.value === true)
-        .map((filter) => filter.label);
-      state.propertiesFiltered = state.propertiesData.filter((property) =>
-        typesToFilter.includes(property.type)
-      );
+      let dataFilteredResult = [...state.propertiesData];
+
+      //Filter on Types
+      if (!state.typeFiltersDefault) {
+        const typesToFilter = state.typeFilters
+          .filter((filter) => filter.value === true)
+          .map((filter) => filter.label);
+        dataFilteredResult = dataFilteredResult.filter((property) =>
+          typesToFilter.includes(property.type)
+        );
+      }
 
       //Filter propertiesFiltered on Availability
-      state.propertiesFiltered = state.propertiesFiltered.filter(
-        (property) => property.available === state.availableFilter
-      );
+      if (!state.availableFilterDefault) {
+        dataFilteredResult = dataFilteredResult.filter(
+          (property) => property.available === state.availableFilter
+        );
+      }
+
+      state.propertiesFiltered = dataFilteredResult;
     },
     updateTypeFilters(state, action) {
+      state.typeFiltersDefault = false;
       state.typeFilters = action.payload;
     },
     updateAvailableFilter(state, action) {
+      state.availableFilterDefault = false;
       state.availableFilter = action.payload;
     },
   },
