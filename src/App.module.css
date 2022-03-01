@@ -28,3 +28,17 @@
   margin-left: 2rem;
   align-items: center;
 }
+
+@media (max-width: 768px) {
+  .filters {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    margin-left: 0;
+  }
+  .logo {
+    display: flex;
+    margin: auto;
+  }
+}

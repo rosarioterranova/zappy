@@ -21,6 +21,15 @@
   animation: 0.2s slideInFromDown;
 }
 
+@media (max-width: 768px) {
+  .container {
+    width: 100vw;
+  }
+  .dialog {
+    width: 22rem;
+  }
+}
+
 @keyframes slideInFromDown {
   0% {
     transform: translateY(100%);

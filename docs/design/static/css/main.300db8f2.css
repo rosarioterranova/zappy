@@ -88,6 +88,15 @@
           animation: 0.2s Dialog_slideInFromDown__K9lSX;
 }
 
+@media (max-width: 768px) {
+  .Dialog_container__fzuUJ {
+    width: 100vw;
+  }
+  .Dialog_dialog__h8TFU {
+    width: 22rem;
+  }
+}
+
 @-webkit-keyframes Dialog_slideInFromDown__K9lSX {
   0% {
     -webkit-transform: translateY(100%);
@@ -298,4 +307,4 @@
 }
 
 
-/*# sourceMappingURL=main.72df8def.css.map*/
+/*# sourceMappingURL=main.300db8f2.css.map*/
