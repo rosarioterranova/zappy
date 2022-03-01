@@ -13,7 +13,9 @@ export const MultiSelect = ({ label, options, onChange }) => {
 
   useEffect(() => {
     setOptionsData(options);
-    setActualLabel(label);
+    if (options.every((option) => option.value === false)) {
+      setActualLabel(label);
+    }
   }, [options]);
 
   function onOptionChecked(optionChecked) {
