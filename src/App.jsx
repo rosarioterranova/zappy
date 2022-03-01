@@ -1,39 +1,59 @@
 import { useState, useEffect } from "react";
 
+//Redux
+import { Provider } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import store from "./store";
+import {
+  fetchProperties,
+  selectPropertiesData,
+  selectPropertiesFiltered,
+} from "./slices/propertiesSlice";
+
+//Stiles
 import style from "./App.module.css";
 import logo from "./assets/zappyrent.png";
 
+//Constants
 import { ROOM_TYPES } from "./helpers/constants";
 
+//Components
 import { Spinner } from "./components/Spinner";
 import { MultiSelect } from "./components/MultiSelect";
 import { Checkbox } from "./components/Checkbox";
 import { Divider } from "./components/Divider";
-
 import { PropertiesList } from "./components/PropertiesList";
 
 export default function App() {
-  const [propertiesData, setPropertiesData] = useState([]);
-  const [propertiesFiltered, setPropertiesFiltered] = useState([]);
-  const [typeFilters, setTypeFilters] = useState(
-    ROOM_TYPES.map((type) => ({ label: type, value: false }))
-  );
-  const [availableFilter, setAvailableFilter] = useState(false);
+  const dispatch = useDispatch();
+  const propertiesData = useSelector(selectPropertiesData);
+  const propertiesFiltered = useSelector(selectPropertiesFiltered);
 
   useEffect(() => {
-    fetch(
-      "https://my-json-server.typicode.com/zappyrent/frontend-assessment/properties"
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setPropertiesData(data);
-        setPropertiesFiltered(data);
-      });
+    dispatch(fetchProperties());
   }, []);
 
-  useEffect(() => {
-    applyFilters();
-  }, [typeFilters, availableFilter]);
+  // const [propertiesData, setPropertiesData] = useState([]);
+  // const [propertiesFiltered, setPropertiesFiltered] = useState([]);
+  // const [typeFilters, setTypeFilters] = useState(
+  //   ROOM_TYPES.map((type) => ({ label: type, value: false }))
+  // );
+  // const [availableFilter, setAvailableFilter] = useState(false);
+
+  // useEffect(() => {
+  //   fetch(
+  //     "https://my-json-server.typicode.com/zappyrent/frontend-assessment/properties"
+  //   )
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setPropertiesData(data);
+  //       setPropertiesFiltered(data);
+  //     });
+  // }, []);
+
+  // useEffect(() => {
+  //   applyFilters();
+  // }, [typeFilters, availableFilter]);
 
   if (propertiesData.length === 0) {
     return (
@@ -62,27 +82,29 @@ export default function App() {
   }
 
   return (
-    <div className={style.app}>
-      <div className={style.navbar}>
-        <div>
-          <img className={style.logo} src={logo} alt="logo" />
+    <Provider store={store}>
+      <div className={style.app}>
+        <div className={style.navbar}>
+          <div>
+            <img className={style.logo} src={logo} alt="logo" />
+          </div>
+          <div className={style.filters}>
+            <MultiSelect
+              label="Tipologia"
+              options={typeFilters}
+              onChange={(newFilters) => setTypeFilters(newFilters)}
+            />
+            <Checkbox
+              label="Disponibile subito"
+              defaultChecked={availableFilter}
+              labelPosition="left"
+              onClick={(checked) => setAvailableFilter(!availableFilter)}
+            />
+          </div>
+          <Divider />
         </div>
-        <div className={style.filters}>
-          <MultiSelect
-            label="Tipologia"
-            options={typeFilters}
-            onChange={(newFilters) => setTypeFilters(newFilters)}
-          />
-          <Checkbox
-            label="Disponibile subito"
-            defaultChecked={availableFilter}
-            labelPosition="left"
-            onClick={(checked) => setAvailableFilter(!availableFilter)}
-          />
-        </div>
-        <Divider />
+        <PropertiesList properties={propertiesFiltered} />
       </div>
-      <PropertiesList properties={propertiesFiltered} />
-    </div>
+    </Provider>
   );
 }
