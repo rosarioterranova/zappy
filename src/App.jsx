@@ -1,21 +1,24 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 //Redux
-import { Provider } from "react-redux";
 import { useSelector, useDispatch } from "react-redux";
-import store from "./store";
 import {
   fetchProperties,
-  selectPropertiesData,
+  selectFetchPropertiesRequest,
   selectPropertiesFiltered,
+  selectTypeFilters,
+  selectAvailableFilter,
+  filterProperties,
+  updateTypeFilters,
+  updateAvailableFilter,
 } from "./slices/propertiesSlice";
 
 //Stiles
 import style from "./App.module.css";
 import logo from "./assets/zappyrent.png";
 
-//Constants
-import { ROOM_TYPES } from "./helpers/constants";
+//Helpers
+import { REQUEST_STATUS } from "./helpers/constants";
 
 //Components
 import { Spinner } from "./components/Spinner";
@@ -26,36 +29,20 @@ import { PropertiesList } from "./components/PropertiesList";
 
 export default function App() {
   const dispatch = useDispatch();
-  const propertiesData = useSelector(selectPropertiesData);
+  const fetchPropertiesRequest = useSelector(selectFetchPropertiesRequest);
   const propertiesFiltered = useSelector(selectPropertiesFiltered);
+  const typeFilters = useSelector(selectTypeFilters);
+  const availableFilter = useSelector(selectAvailableFilter);
 
   useEffect(() => {
     dispatch(fetchProperties());
   }, []);
 
-  // const [propertiesData, setPropertiesData] = useState([]);
-  // const [propertiesFiltered, setPropertiesFiltered] = useState([]);
-  // const [typeFilters, setTypeFilters] = useState(
-  //   ROOM_TYPES.map((type) => ({ label: type, value: false }))
-  // );
-  // const [availableFilter, setAvailableFilter] = useState(false);
+  useEffect(() => {
+    dispatch(filterProperties());
+  }, [typeFilters, availableFilter]);
 
-  // useEffect(() => {
-  //   fetch(
-  //     "https://my-json-server.typicode.com/zappyrent/frontend-assessment/properties"
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setPropertiesData(data);
-  //       setPropertiesFiltered(data);
-  //     });
-  // }, []);
-
-  // useEffect(() => {
-  //   applyFilters();
-  // }, [typeFilters, availableFilter]);
-
-  if (propertiesData.length === 0) {
+  if (fetchPropertiesRequest.status !== REQUEST_STATUS.FULFILLED) {
     return (
       <div className={style.loading}>
         <img className={style.logo} src={logo} alt="logo" />
@@ -65,46 +52,30 @@ export default function App() {
     );
   }
 
-  function applyFilters() {
-    const filteredByAvailability = propertiesData.filter(
-      (property) => property.available === availableFilter
-    );
-
-    const typesToFilter = typeFilters
-      .filter((filter) => filter.value === true)
-      .map((filter) => filter.label);
-
-    const filteredByTypeAndAvailability = filteredByAvailability.filter(
-      (property) => typesToFilter.includes(property.type)
-    );
-
-    setPropertiesFiltered(filteredByTypeAndAvailability);
-  }
-
   return (
-    <Provider store={store}>
-      <div className={style.app}>
-        <div className={style.navbar}>
-          <div>
-            <img className={style.logo} src={logo} alt="logo" />
-          </div>
-          <div className={style.filters}>
-            <MultiSelect
-              label="Tipologia"
-              options={typeFilters}
-              onChange={(newFilters) => setTypeFilters(newFilters)}
-            />
-            <Checkbox
-              label="Disponibile subito"
-              defaultChecked={availableFilter}
-              labelPosition="left"
-              onClick={(checked) => setAvailableFilter(!availableFilter)}
-            />
-          </div>
-          <Divider />
+    <div className={style.app}>
+      <div className={style.navbar}>
+        <div>
+          <img className={style.logo} src={logo} alt="logo" />
         </div>
-        <PropertiesList properties={propertiesFiltered} />
+        <div className={style.filters}>
+          <MultiSelect
+            label="Tipologia"
+            options={typeFilters}
+            onChange={(newFilters) => dispatch(updateTypeFilters(newFilters))}
+          />
+          <Checkbox
+            label="Disponibile subito"
+            defaultChecked={availableFilter}
+            labelPosition="left"
+            onClick={(checked) =>
+              dispatch(updateAvailableFilter(!availableFilter))
+            }
+          />
+        </div>
+        <Divider />
       </div>
-    </Provider>
+      <PropertiesList properties={propertiesFiltered} />
+    </div>
   );
 }

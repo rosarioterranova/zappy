@@ -4,3 +4,10 @@ export const ROOM_TYPES = [
   "Shared Room",
   "Studio",
 ];
+
+export const REQUEST_STATUS = {
+  IDLE: "idle",
+  PENDING: "pending",
+  FULFILLED: "fulfilled",
+  REJECTED: "rejected",
+};

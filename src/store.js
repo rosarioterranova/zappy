@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import propertiesReducer from "../features/propertiesSlice";
+import propertiesReducer from "./slices/propertiesSlice";
 
 export default configureStore({
   reducer: {
